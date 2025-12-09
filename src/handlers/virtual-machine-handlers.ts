@@ -4,7 +4,7 @@ export class VirtualMachineHandlers {
   constructor(private cloudStackClient: CloudStackClient) {}
 
   async handleListVirtualMachines(args: any) {
-    const result = await this.cloudStackClient.listVirtualMachines(args);
+    const result = await this.cloudStackClient.listVirtualMachines({ ...args, listall: true });
     const vms = result.listvirtualmachinesresponse?.virtualmachine || [];
     
     const vmList = vms.map((vm: any) => ({
@@ -42,7 +42,7 @@ export class VirtualMachineHandlers {
   }
 
   async handleGetVirtualMachine(args: any) {
-    const result = await this.cloudStackClient.listVirtualMachines({ id: args.id });
+    const result = await this.cloudStackClient.listVirtualMachines({ id: args.id, listall: true });
     const vms = result.listvirtualmachinesresponse?.virtualmachine || [];
     
     if (vms.length === 0) {
@@ -112,7 +112,7 @@ export class VirtualMachineHandlers {
   async handleDestroyVirtualMachine(args: any) {
     try {
       // First, check current VM state
-      const vmResult = await this.cloudStackClient.listVirtualMachines({ id: args.id });
+      const vmResult = await this.cloudStackClient.listVirtualMachines({ id: args.id, listall: true });
       const vms = vmResult.listvirtualmachinesresponse?.virtualmachine || [];
       
       if (vms.length === 0) {
@@ -256,7 +256,7 @@ export class VirtualMachineHandlers {
   }
 
   async handleListVirtualMachineMetrics(args: any) {
-    const result = await this.cloudStackClient.listVirtualMachineMetrics(args);
+    const result = await this.cloudStackClient.listVirtualMachineMetrics({ ...args, listall: true });
     const metrics = result.listvirtualmachinemetricsresponse?.virtualmachine || [];
     
     const metricsList = metrics.map((vm: any) => ({
