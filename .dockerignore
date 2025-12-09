@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Build output (we rebuild in Docker)
+build/
+
+# Development files
+.env
+.env.*
+*.log
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Tests
+tests/
+*.test.ts
+*.spec.ts
+jest.config.cjs
+coverage/
+
+# Documentation
+*.md
+!README.md
+
+# OS files
+.DS_Store
+Thumbs.db
+
